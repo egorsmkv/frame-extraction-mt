@@ -2,14 +2,22 @@
   Compilation commands:
 
   For debugging:
-  clang -g -O2 -o ppm_to_jpg_debug ppm_to_jpg_threaded.c $(pkg-config --cflags \
-  --libs libjpeg) -lpthread
+  clang -g -O2 -o ppm_to_jpg_threaded_debug ppm_to_jpg_threaded.c \
+  -I/opt/homebrew/opt/jpeg-turbo/include -L/opt/homebrew/opt/jpeg-turbo/lib -ljpeg -lpthread
+
+  For release mozjpeg:
+  clang -O3 -flto -DNDEBUG -o ppm_to_jpg_threaded_mozjpeg ppm_to_jpg_threaded.c \
+  -I/opt/homebrew/opt/mozjpeg/include -L/opt/homebrew/opt/mozjpeg/lib -ljpeg -lpthread
 
   For release:
-  clang -O3 -flto -DNDEBUG -o ppm_to_jpg_threaded ppm_to_jpg_threaded.c \
-  $(pkg-config --cflags --libs libjpeg) -lpthread
+  clang -O3 -flto -DNDEBUG -o ppm_to_jpg_threaded_jpegturbo ppm_to_jpg_threaded.c \
+  -I/opt/homebrew/opt/jpeg-turbo/include -L/opt/homebrew/opt/jpeg-turbo/lib -ljpeg -lpthread
 
   clang-format -i ppm_to_jpg_threaded.c
+
+  Notes:
+
+  1) mozjpeg slower because it compresses data
 */
 
 #include <dirent.h>  // For directory scanning

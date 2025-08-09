@@ -1,6 +1,7 @@
-frame_extractor_threaded
-ppm_to_jpg_threaded
+frame_extractor_threaded*
+ppm_to_jpg_threaded*
 
 *.mp4*
 
 test
+*_debug*
